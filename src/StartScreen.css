@@ -1,0 +1,38 @@
+
+.startScreen--container {
+    background-image: url('../public/quiz-game.jpg');
+    position: fixed;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start--quiz--button {
+    width: 200px;
+    height: 60px;
+    margin: 30px 0 0 0;
+    background-color: blueviolet;
+    border-radius: 20px;
+    border-style: none;
+    font-size: 20px;
+    color: white;
+}
+.start--quiz--button:hover {
+    background-color: purple;
+}
+.start--quiz--button:active {
+    border-style: solid;
+}
+
+.game--title {
+    color: #c8a2c8;
+}
+.game--description {
+    color: cornflowerblue;
+    margin: 10px 0 0 0;
+    font-size: 20px;
+    font-weight: 500;
+}
