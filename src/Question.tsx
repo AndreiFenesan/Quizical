@@ -8,10 +8,10 @@ interface QuestionProps {
     correctAnswer: string
     allAnswers:string[]
 }
+
 const Question = ({question,correctAnswer,allAnswers}:QuestionProps):JSX.Element => {
     const [lastClickedAnswerId,setLastClickedAnswerId] = React.useState<number>(-1)//-1 means that no answer were selected
 
-    console.log(question)
     function buttonClickHandler(buttonId:number):void {
         setLastClickedAnswerId(buttonId);
     }
@@ -28,13 +28,15 @@ const Question = ({question,correctAnswer,allAnswers}:QuestionProps):JSX.Element
         />
         )})
     return (
-        <div>
-            <h4 className={"question"}  >{he.decode(question)}</h4>
+        <React.Fragment>
+        <div className={"question--container"}>
+            <h3 className={"question--text"}  >{he.decode(question)}</h3>
             <div className={"answers--container"}>
-
                 {answersElements}
             </div>
         </div>
+            <hr className={"delimiter"}/>
+        </React.Fragment>
     )
 }
 export default Question;

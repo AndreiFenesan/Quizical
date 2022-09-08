@@ -1,20 +1,39 @@
 .answers--container {
     height: 60px;
-    width: 1500px;
+    width: 1200px;
     display:  flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    gap: 40px;
     align-items: center;
-    background-color: purple;
 }
 
 .answer--button {
+    color: #2d314b;
     height: 25px;
-    min-width: 250px;
+    min-width: 200px;
     width:fit-content;
-    border: none;
+    border: 1px solid #a1a9cc;
     border-radius: 6px;
-    background-color: white;
+    background-color: #f5f7fb;
 }
 .answer--button--color {
-    background-color: cornflowerblue;
+    background-color: #c1c6e3;
+}
+.question--container{
+    height: 180px;
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.question--text{
+    margin-bottom: 15px;
+    color: #2d314b;
+}
+
+.delimiter {
+    border: 1px solid #eef0f8;
+    width: 1200px
 }

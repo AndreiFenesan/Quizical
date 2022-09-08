@@ -5,6 +5,7 @@ import {QuestionModel} from "./questionModel";
 function App() : JSX.Element {
     const [isGameRunning, setIsGameRunning] =React.useState<boolean>(false);
     const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([])
+
     function startButtonClickHandler() {
         setIsGameRunning(true);
     }
