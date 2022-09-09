@@ -7,26 +7,29 @@ interface QuestionProps {
     question: string
     correctAnswer: string
     allAnswers:string[]
+    setIsCorrectAnswerSelectedForQuestionId: (index:number, value:boolean) => void //function which set if the selected answer is correct of not
 }
 
-const Question = ({question,correctAnswer,allAnswers}:QuestionProps):JSX.Element => {
+const Question = ({questionId,question,correctAnswer,allAnswers,setIsCorrectAnswerSelectedForQuestionId}:QuestionProps):JSX.Element => {
     const [lastClickedAnswerId,setLastClickedAnswerId] = React.useState<number>(-1)//-1 means that no answer were selected
 
-    function buttonClickHandler(buttonId:number):void {
+    function answerButtonClickHandler(buttonId:number):void {
+        setIsCorrectAnswerSelectedForQuestionId(questionId, allAnswers[buttonId] === correctAnswer? true : false);
         setLastClickedAnswerId(buttonId);
     }
 
-    const answersElements = allAnswers.map((answer,index) =>{
+    const answersElements = allAnswers.map((answer,answerId) =>{
         return(
         <input
-            id={`${index}`}
+            id={`${answerId}`}
             type={"button"}
             key={answer}
-            className={index!== lastClickedAnswerId? "answer--button" : "answer--button answer--button--color"}
-            onClick={() => buttonClickHandler(index)}
+            className={answerId!== lastClickedAnswerId? "answer--button" : "answer--button answer--button--color"}
+            onClick={() => answerButtonClickHandler(answerId)}
             value={he.decode(answer)}//must decode de answer because it contains html entities
         />
         )})
+
     return (
         <React.Fragment>
         <div className={"question--container"}>

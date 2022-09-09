@@ -16,6 +16,7 @@ function App() : JSX.Element {
                 .then(data => setQuestionModels(getArrayOfQuestionModels(data)))
         }
     ,[])
+
     function getAllAnswersArray (correctAnswer:string, incorrectAnswers: string[]):string[]{
         //return an array with all answers where the correct answer is randomly inserted.
         let answers = [...incorrectAnswers];

@@ -4,8 +4,33 @@
     width: 100%;
     height: 100%;
     background-color: #f5f7fb;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.check--answers--button {
+    width: 150px;
+    height: 35px;
+    margin-bottom: 20px;
+    background-color: cornflowerblue;
+    border-radius: 7px;
+    border: none;
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+.check--answers--button:hover {
+    background-color: #5976a9;
+
+}
+
+.check--answers--button:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+    /* Lowering the shadow */
 }
