@@ -5,22 +5,37 @@ import {QuestionModel} from "./Question/questionModel";
 function App() : JSX.Element {
     const [isGameRunning, setIsGameRunning] = React.useState<boolean>(false);
     const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([]);
-    const [gameNumber,setGameNumber] = React.useState(1);
+    const [currentGameNumber,setCurrentGameNumber] = React.useState<number>(1);
 
     function startButtonClickHandler() {
         setIsGameRunning(true);
     }
 
     React.useEffect(() => {
+            function getArrayOfQuestionModels(data:any):QuestionModel[] {
+                //extracts the question model from the data
+                const arrObj = data.results;
+                let resultArray:QuestionModel[]=[];
+                for(let i=0;i<arrObj.length;i++){
+                    const obj:QuestionModel ={
+                        questionId:i,
+                        question:arrObj[i].question,
+                        correctAnswer:arrObj[i].correct_answer,
+                        allAnswers:getAllAnswersArray(arrObj[i].correct_answer,arrObj[i].incorrect_answers),
+                    }
+                    resultArray.push(obj);
+                }
+                return resultArray;
+            }
             fetch("https://opentdb.com/api.php?amount=5&type=multiple")
                 .then(response => response.json())
                 .then(data => getArrayOfQuestionModels(data))
                 .then(question => setQuestionModels(question))
         }
-    ,[gameNumber]);
+    ,[currentGameNumber]);
 
     function newGameHandler() {
-        setGameNumber(lastGameNumber => lastGameNumber + 1);
+        setCurrentGameNumber(lastGameNumber => lastGameNumber + 1);
         setIsGameRunning(false);
     }
 
@@ -31,23 +46,6 @@ function App() : JSX.Element {
         const randomPosition = Math.floor(Math.random() * 4) ;//get the random position in the array
         answers.splice(randomPosition,0,correctAnswer);
         return answers;
-    }
-
-    function getArrayOfQuestionModels(data:any):QuestionModel[] {
-        //extracts the question model from the data
-        const arrObj = data.results;
-        let resultArray:QuestionModel[]=[];
-        for(let i=0;i<arrObj.length;i++){
-            const obj:QuestionModel ={
-                questionId:i,
-                question:arrObj[i].question,
-                correctAnswer:arrObj[i].correct_answer,
-                allAnswers:getAllAnswersArray(arrObj[i].correct_answer,arrObj[i].incorrect_answers),
-            }
-            resultArray.push(obj);
-        }
-        return resultArray;
-
     }
 
   return (
