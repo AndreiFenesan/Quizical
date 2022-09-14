@@ -7,6 +7,9 @@ interface GameScreenProps {
     allQuestions:QuestionModel[]
 }
 function GameScreen ({allQuestions}:GameScreenProps) : JSX.Element {
+
+    const [isCheckAnswerButtonPressed,setIsCheckAnswerButtonPressed] = React.useState(false);
+
     const numberOfQuestions = allQuestions.length;
     let correctAnswersArray= Array(numberOfQuestions).fill(false);
 
@@ -25,6 +28,7 @@ function GameScreen ({allQuestions}:GameScreenProps) : JSX.Element {
             correctAnswer={questionModel.correctAnswer}
             allAnswers={questionModel.allAnswers}
             setIsCorrectAnswerSelectedForQuestionId={setIsCorrectAnswerSelectedForQuestionId}
+            isCheckAnswerButtonPressed={isCheckAnswerButtonPressed}
         />
     ))
     return(
@@ -34,6 +38,7 @@ function GameScreen ({allQuestions}:GameScreenProps) : JSX.Element {
                 type={"button"}
                 value={"Check answers"}
                 className={"check--answers--button"}
+                onClick={() => setIsCheckAnswerButtonPressed(true)}
             />
         </div>
         )

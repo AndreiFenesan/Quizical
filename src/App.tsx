@@ -13,7 +13,8 @@ function App() : JSX.Element {
     React.useEffect(() => {
             fetch("https://opentdb.com/api.php?amount=5&type=multiple")
                 .then(response => response.json())
-                .then(data => setQuestionModels(getArrayOfQuestionModels(data)))
+                .then(data => getArrayOfQuestionModels(data))
+                .then(question => setQuestionModels(question))
         }
     ,[])
 
@@ -27,6 +28,7 @@ function App() : JSX.Element {
     }
 
     function getArrayOfQuestionModels(data:any):QuestionModel[] {
+        //extracts the question model from the data
         const arrObj = data.results;
         let resultArray:QuestionModel[]=[];
         for(let i=0;i<arrObj.length;i++){

@@ -38,3 +38,15 @@
     border: 1px solid #eef0f8;
     width: 1200px
 }
+
+.red--background--color {
+    background-color: #f7d9db;
+}
+.check--answers--opacity {
+    opacity: 0.5;
+}
+.green--background--color {
+    background-color: #94d7a2;
+}
+
+
