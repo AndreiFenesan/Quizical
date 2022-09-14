@@ -36,3 +36,13 @@
     font-size: 20px;
     font-weight: 500;
 }
+
+.select{
+
+    margin: 20px 0 50px 0;
+    padding: 10px;
+    background-color: #3a98e2;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+}

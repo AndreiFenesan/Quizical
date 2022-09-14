@@ -6,12 +6,19 @@ function App() : JSX.Element {
     const [isGameRunning, setIsGameRunning] = React.useState<boolean>(false);
     const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([]);
     const [currentGameNumber,setCurrentGameNumber] = React.useState<number>(1);
+    const [difficulty,setDifficulty] = React.useState("Easy");
 
     function startButtonClickHandler() {
         setIsGameRunning(true);
     }
+    function difficultyMenuOnchange(value:string):void {
+        setDifficulty(value);
+    }
 
     React.useEffect(() => {
+            console.log("Effect ran");
+            console.log(difficulty);
+
             function getArrayOfQuestionModels(data:any):QuestionModel[] {
                 //extracts the question model from the data
                 const arrObj = data.results;
@@ -27,12 +34,12 @@ function App() : JSX.Element {
                 }
                 return resultArray;
             }
-            fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+            fetch(`https://opentdb.com/api.php?amount=5&type=multiple&difficulty=${difficulty.toLowerCase()}`)
                 .then(response => response.json())
                 .then(data => getArrayOfQuestionModels(data))
                 .then(question => setQuestionModels(question))
         }
-    ,[currentGameNumber]);
+    ,[currentGameNumber,difficulty]);
 
     function newGameHandler() {
         setCurrentGameNumber(lastGameNumber => lastGameNumber + 1);
@@ -50,7 +57,7 @@ function App() : JSX.Element {
 
   return (
     <div className="App">
-        {isGameRunning ? <GameScreen allQuestions={questionModels} newGameHandler={newGameHandler}/> : <StartScreen startButtonClickHandler={startButtonClickHandler}/>}
+        {isGameRunning ? <GameScreen allQuestions={questionModels} newGameHandler={newGameHandler}/> : <StartScreen difficulty={difficulty}  selectOnChange={difficultyMenuOnchange} startButtonClickHandler={startButtonClickHandler}/>}
     </div>
   );
 }
