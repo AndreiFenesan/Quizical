@@ -3,8 +3,9 @@ import StartScreen from "./Start Screen/StartScreen";
 import GameScreen from "./Game Screen/GameScreen";
 import {QuestionModel} from "./Question/questionModel";
 function App() : JSX.Element {
-    const [isGameRunning, setIsGameRunning] =React.useState<boolean>(false);
-    const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([])
+    const [isGameRunning, setIsGameRunning] = React.useState<boolean>(false);
+    const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([]);
+    const [gameNumber,setGameNumber] = React.useState(1);
 
     function startButtonClickHandler() {
         setIsGameRunning(true);
@@ -16,7 +17,12 @@ function App() : JSX.Element {
                 .then(data => getArrayOfQuestionModels(data))
                 .then(question => setQuestionModels(question))
         }
-    ,[])
+    ,[gameNumber]);
+
+    function newGameHandler() {
+        setGameNumber(lastGameNumber => lastGameNumber + 1);
+        setIsGameRunning(false);
+    }
 
     function getAllAnswersArray (correctAnswer:string, incorrectAnswers: string[]):string[]{
         //return an array with all answers where the correct answer is randomly inserted.
@@ -46,7 +52,7 @@ function App() : JSX.Element {
 
   return (
     <div className="App">
-        {isGameRunning ? <GameScreen allQuestions={questionModels}/> : <StartScreen startButtonClickHandler={startButtonClickHandler}/>}
+        {isGameRunning ? <GameScreen allQuestions={questionModels} newGameHandler={newGameHandler}/> : <StartScreen startButtonClickHandler={startButtonClickHandler}/>}
     </div>
   );
 }

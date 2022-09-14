@@ -5,8 +5,9 @@ import {QuestionModel} from "../Question/questionModel";
 
 interface GameScreenProps {
     allQuestions:QuestionModel[]
+    newGameHandler: () => void//function which generates another game
 }
-function GameScreen ({allQuestions}:GameScreenProps) : JSX.Element {
+function GameScreen ({allQuestions,newGameHandler}:GameScreenProps) : JSX.Element {
 
     const [isCheckAnswerButtonPressed,setIsCheckAnswerButtonPressed] = React.useState(false);
 
@@ -31,15 +32,24 @@ function GameScreen ({allQuestions}:GameScreenProps) : JSX.Element {
             isCheckAnswerButtonPressed={isCheckAnswerButtonPressed}
         />
     ))
+
+    const checkAnswerElement = <input
+        type={"button"}
+        value={"Check answers"}
+        className={"check--answers--button"}
+        onClick={() => setIsCheckAnswerButtonPressed(true)}
+    />
+
+    const newGameButtonElement = <input
+        type={"button"}
+        value={"New game"}
+        className={"check--answers--button"}
+        onClick={() => newGameHandler()}
+    />
     return(
         <div className={"gameScreen--container"}>
             {allQuestionElements}
-            <input
-                type={"button"}
-                value={"Check answers"}
-                className={"check--answers--button"}
-                onClick={() => setIsCheckAnswerButtonPressed(true)}
-            />
+            {isCheckAnswerButtonPressed ? newGameButtonElement : checkAnswerElement}
         </div>
         )
 }
