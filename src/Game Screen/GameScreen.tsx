@@ -1,7 +1,7 @@
 import React from "react";
 import './gameScreen.css'
-import Question from "./Question";
-import {QuestionModel} from "./questionModel";
+import Question from "../Question/Question";
+import {QuestionModel} from "../Question/questionModel";
 
 interface GameScreenProps {
     allQuestions:QuestionModel[]

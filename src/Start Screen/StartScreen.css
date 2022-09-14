@@ -1,6 +1,6 @@
 
 .startScreen--container {
-    background-image: url('../public/quiz-game.jpg');
+    background-image: url('../../public/quiz-game.jpg');
     position: fixed;
     flex-direction: column;
     height: 100%;

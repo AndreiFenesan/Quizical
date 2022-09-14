@@ -1,7 +1,7 @@
 import React from 'react';
-import StartScreen from "./StartScreen";
-import GameScreen from "./GameScreen";
-import {QuestionModel} from "./questionModel";
+import StartScreen from "./Start Screen/StartScreen";
+import GameScreen from "./Game Screen/GameScreen";
+import {QuestionModel} from "./Question/questionModel";
 function App() : JSX.Element {
     const [isGameRunning, setIsGameRunning] =React.useState<boolean>(false);
     const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([])
