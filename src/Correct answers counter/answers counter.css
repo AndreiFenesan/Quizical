@@ -6,4 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 250px;
+    height: 200px;
+    background-color: red;
 }
