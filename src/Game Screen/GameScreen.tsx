@@ -2,6 +2,7 @@ import React from "react";
 import './gameScreen.css'
 import Question from "../Question/Question";
 import {QuestionModel} from "../Question/questionModel";
+import AnswersCounter from "../Correct answers counter/AnswersCounter";
 
 interface GameScreenProps {
     allQuestions:QuestionModel[]
@@ -12,15 +13,27 @@ function GameScreen ({allQuestions,newGameHandler}:GameScreenProps) : JSX.Elemen
     const [isCheckAnswerButtonPressed,setIsCheckAnswerButtonPressed] = React.useState(false);
 
     const numberOfQuestions = allQuestions.length;
-    let correctAnswersArray= Array(numberOfQuestions).fill(false);
+
+    let correctAnswersArray= React.useRef<boolean[]>(Array(numberOfQuestions).fill(false)); //We want to persist the array between renders
+
 
     function setIsCorrectAnswerSelectedForQuestionId(questionId: number, value:boolean) :void {
         //sets the value(true or false) for the question with th id questionId.
         //true means that the current selected answer is the correct answer.
         //false means that the current selected answer is one of the incorrect answers.
-        correctAnswersArray[questionId] = value;
+        correctAnswersArray.current[questionId] = value;
     }
-    
+
+    function getNumberOfCorrectSelectedAnswers(correctAnswersArr:boolean[]) :number {
+       //return  correctAnswersArr.filter(value => value === true).length;
+        let numberOfCorrectSelectedAnswers = 0;
+        for(let i=0;i<correctAnswersArr.length;i++) {
+            if(correctAnswersArr[i] === true)
+                numberOfCorrectSelectedAnswers++;
+        }
+        return numberOfCorrectSelectedAnswers;
+    }
+
     const allQuestionElements = allQuestions.map(questionModel => (
         <Question
             key={questionModel.question}
@@ -50,6 +63,11 @@ function GameScreen ({allQuestions,newGameHandler}:GameScreenProps) : JSX.Elemen
         <div className={"gameScreen--container"}>
             {allQuestionElements}
             {isCheckAnswerButtonPressed ? newGameButtonElement : checkAnswerElement}
+            {
+                isCheckAnswerButtonPressed && <AnswersCounter
+                     totalNumberOfAnswers={numberOfQuestions}
+                     correctSelectedAnswers={getNumberOfCorrectSelectedAnswers(correctAnswersArray.current)}/>
+            }
         </div>
         )
 }
