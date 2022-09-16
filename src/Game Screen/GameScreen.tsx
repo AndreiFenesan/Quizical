@@ -62,12 +62,14 @@ function GameScreen ({allQuestions,newGameHandler}:GameScreenProps) : JSX.Elemen
     return(
         <div className={"gameScreen--container"}>
             {allQuestionElements}
-            {isCheckAnswerButtonPressed ? newGameButtonElement : checkAnswerElement}
-            {
-                isCheckAnswerButtonPressed && <AnswersCounter
-                     totalNumberOfAnswers={numberOfQuestions}
-                     correctSelectedAnswers={getNumberOfCorrectSelectedAnswers(correctAnswersArray.current)}/>
-            }
+            <div className={"checkButton--counter--container"}>
+                {isCheckAnswerButtonPressed ? newGameButtonElement : checkAnswerElement}
+                {
+                    isCheckAnswerButtonPressed && <AnswersCounter
+                        totalNumberOfAnswers={numberOfQuestions}
+                        correctSelectedAnswers={getNumberOfCorrectSelectedAnswers(correctAnswersArray.current)}/>
+                }
+            </div>
         </div>
         )
 }
