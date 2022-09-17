@@ -6,17 +6,35 @@ function App() : JSX.Element {
     const [isGameRunning, setIsGameRunning] = React.useState<boolean>(false);
     const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([]);
     const [currentGameNumber,setCurrentGameNumber] = React.useState<number>(1);
-    const [difficulty,setDifficulty] = React.useState("Easy");
+    const [gameSettings,setGameSettings] = React.useState({difficulty: "Easy", numberOfQuestions: 5});
 
     function startButtonClickHandler() {
         setIsGameRunning(true);
     }
-    function difficultyMenuOnchange(value:string):void {
-        setDifficulty(value);
+
+    function isOutOfInterval(lowerMargin:number, upperMargin:number, value:number){
+        //returns true if value is in the [lowerMargin, upperMargin] interval
+        //returns false otherwise
+        return value < lowerMargin || value > upperMargin;
+    }
+
+    function difficultyMenuOnchange(event:React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>):void {
+        const name=event.currentTarget.name;
+        const value=event.currentTarget.value;
+        if(name === "numberOfQuestions"){//check if the number of question spinBox was changed
+            if(isOutOfInterval(5,15,Number(value)))
+                //restrict user to write numbers which are not in the [5,15] interval
+                return;
+        }
+        setGameSettings(prevState => (
+            {
+                ...prevState,
+                [name]:value
+            }
+        ));
     }
 
     React.useEffect(() => {
-
             function getArrayOfQuestionModels(data:any):QuestionModel[] {
                 //extracts the question model from the data
                 const arrObj = data.results;
@@ -32,12 +50,14 @@ function App() : JSX.Element {
                 }
                 return resultArray;
             }
-            fetch(`https://opentdb.com/api.php?amount=5&type=multiple&difficulty=${difficulty.toLowerCase()}`)
+
+            const url = `https://opentdb.com/api.php?amount=${gameSettings.numberOfQuestions}&type=multiple&difficulty=${gameSettings.difficulty.toLowerCase()}`;
+            fetch(url)
                 .then(response => response.json())
                 .then(data => getArrayOfQuestionModels(data))
                 .then(question => setQuestionModels(question))
         }
-    ,[currentGameNumber,difficulty]);
+    ,[currentGameNumber,gameSettings]);
 
     function newGameHandler() {
         setCurrentGameNumber(lastGameNumber => lastGameNumber + 1);
@@ -57,7 +77,7 @@ function App() : JSX.Element {
     <div className="App">
         {isGameRunning
             ? <GameScreen allQuestions={questionModels} newGameHandler={newGameHandler}/>
-            : <StartScreen difficulty={difficulty}  selectOnChange={difficultyMenuOnchange} startButtonClickHandler={startButtonClickHandler}/>
+            : <StartScreen gameSettings={gameSettings}  gameSettingOnChange={difficultyMenuOnchange} startButtonClickHandler={startButtonClickHandler}/>
         }
     </div>
   );

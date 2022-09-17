@@ -1,6 +1,5 @@
 
 .gameScreen--container{
-    position: fixed;
     width: 100%;
     height: 100%;
     background-color: #f5f7fb;
@@ -9,6 +8,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: scroll;
 }
 
 .check--answers--button {
