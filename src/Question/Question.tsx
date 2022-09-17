@@ -1,5 +1,6 @@
 import React from "react";
 import './question.css';
+import Answer from "./Answer/Answer";
 const he =require("he");
 
 interface QuestionProps {
@@ -36,21 +37,15 @@ const Question = ({questionId,question,correctAnswer,allAnswers,setIsCorrectAnsw
     }
 
     function answerButtonClickHandler(buttonId:number):void {
-        setIsCorrectAnswerSelectedForQuestionId(questionId, allAnswers[buttonId] === correctAnswer? true : false);
+        setIsCorrectAnswerSelectedForQuestionId(questionId, allAnswers[buttonId] === correctAnswer);
         setLastClickedAnswerId(buttonId);
     }
 
     const answersElements = allAnswers.map((answer,answerId) =>{
         return(
-        <input
-            id={`${answerId}`}
-            type={"button"}
-            key={answer}
-            className={getClassName(answerId)}
-            onClick={() => answerButtonClickHandler(answerId)}
-            value={he.decode(answer)}//must decode de answer because it contains html entities
-        />
-        )})
+        <Answer key={answer} answerId={answerId} className={getClassName(answerId)}
+                onClick={() => answerButtonClickHandler(answerId)} answer={answer}/>
+        )});
 
     return (
         <React.Fragment>
