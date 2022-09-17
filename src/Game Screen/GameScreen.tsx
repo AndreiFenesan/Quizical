@@ -25,7 +25,7 @@ function GameScreen ({allQuestions,newGameHandler}:GameScreenProps) : JSX.Elemen
     }
 
     function getNumberOfCorrectSelectedAnswers(correctAnswersArr:boolean[]) :number {
-       //return  correctAnswersArr.filter(value => value === true).length;
+        //returns the number of correct selected answers
         let numberOfCorrectSelectedAnswers = 0;
         for(let i=0;i<correctAnswersArr.length;i++) {
             if(correctAnswersArr[i] === true)
@@ -65,9 +65,11 @@ function GameScreen ({allQuestions,newGameHandler}:GameScreenProps) : JSX.Elemen
             <div className={"checkButton--counter--container"}>
                 {isCheckAnswerButtonPressed ? newGameButtonElement : checkAnswerElement}
                 {
-                    isCheckAnswerButtonPressed && <AnswersCounter
+                    isCheckAnswerButtonPressed &&
+                    <AnswersCounter
                         totalNumberOfAnswers={numberOfQuestions}
-                        correctSelectedAnswers={getNumberOfCorrectSelectedAnswers(correctAnswersArray.current)}/>
+                        correctSelectedAnswers={getNumberOfCorrectSelectedAnswers(correctAnswersArray.current)}
+                    />
                 }
             </div>
         </div>

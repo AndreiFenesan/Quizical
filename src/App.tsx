@@ -16,8 +16,6 @@ function App() : JSX.Element {
     }
 
     React.useEffect(() => {
-            console.log("Effect ran");
-            console.log(difficulty);
 
             function getArrayOfQuestionModels(data:any):QuestionModel[] {
                 //extracts the question model from the data
@@ -57,7 +55,10 @@ function App() : JSX.Element {
 
   return (
     <div className="App">
-        {isGameRunning ? <GameScreen allQuestions={questionModels} newGameHandler={newGameHandler}/> : <StartScreen difficulty={difficulty}  selectOnChange={difficultyMenuOnchange} startButtonClickHandler={startButtonClickHandler}/>}
+        {isGameRunning
+            ? <GameScreen allQuestions={questionModels} newGameHandler={newGameHandler}/>
+            : <StartScreen difficulty={difficulty}  selectOnChange={difficultyMenuOnchange} startButtonClickHandler={startButtonClickHandler}/>
+        }
     </div>
   );
 }
