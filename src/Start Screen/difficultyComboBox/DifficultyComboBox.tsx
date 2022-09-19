@@ -11,7 +11,7 @@ export default function DifficultyComboBox(props: { value: string, onChange: (ev
                 value={props.value}
                 onChange={props.onChange}
             >
-                {options.map(option => <option>{option}</option>)}
+                {options.map(option => <option key={option}>{option}</option>)}
             </select>
         </label>)
 }
