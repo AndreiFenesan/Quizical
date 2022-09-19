@@ -1,0 +1,10 @@
+.spinBox {
+    margin: 0px 0px 0px 60px;
+    width: 80px;
+    border-radius: 8px;
+    padding: 8px;
+
+    background-color: #3a98e2;
+    border: none;
+    font-size: 18px;
+}

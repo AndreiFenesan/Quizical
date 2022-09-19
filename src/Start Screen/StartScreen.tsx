@@ -1,33 +1,25 @@
 import React from "react";
 import './StartScreen.css';
+import DifficultyComboBox from "./difficultyComboBox/DifficultyComboBox";
+import NumberOfQuestionsSpinBox from "./numberOfQuestions/NumberOfQuestionsSpinBox";
+
 interface StartScreenProps {
     startButtonClickHandler: () => void// button click handler
     gameSettingOnChange: (event:React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
     gameSettings:{difficulty:string, numberOfQuestions:number}
 }
 
+
+
+
 const StartScreen : React.FC<StartScreenProps> = ({startButtonClickHandler,gameSettings,gameSettingOnChange}) : JSX.Element =>   {
 
     const selectDifficultyComboBox =
-        <select
-        name={"difficulty"}
-        className={"select"}
-        value={gameSettings.difficulty}
-        onChange={(event) => gameSettingOnChange(event)}
-    >
-        <option value={"Easy"}>Easy</option>
-        <option value={"Medium"}>Medium</option>
-        <option value={"Hard"}>Hard</option>
-    </select>
+        <DifficultyComboBox value={gameSettings.difficulty} onChange={event => gameSettingOnChange(event)}/>
 
     const chooseNumberOfQuestionsElement =
-        <input
-        name={"numberOfQuestions"}
-        value={gameSettings.numberOfQuestions}
-        onChange={event => gameSettingOnChange(event)}
-        className={"spinBox"}
-        type={"number"}
-    />
+        <NumberOfQuestionsSpinBox value={gameSettings.numberOfQuestions}
+                                  onChange={event => gameSettingOnChange(event)}/>
 
     return (
         <div className={"startScreen--container"}>

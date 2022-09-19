@@ -37,23 +37,10 @@
     font-weight: 500;
 }
 
-.select{
-
-    margin: 20px 0 30px 0;
-    padding: 10px;
-    background-color: #3a98e2;
-    border: none;
-    border-radius: 20px;
-    font-size: 16px;
-}
-
-.spinBox {
-    margin: 0;
-    width: 80px;
-    border-radius: 8px;
-    padding: 8px;
-
-    background-color: #3a98e2;
-    border: none;
-    font-size: 18px;
+.gameSettings--label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f7d9db;
+    font-size: 1.1rem;
 }
