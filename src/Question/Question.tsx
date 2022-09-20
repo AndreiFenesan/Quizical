@@ -43,7 +43,7 @@ const Question = ({questionId,question,correctAnswer,allAnswers,setIsCorrectAnsw
 
     const answersElements = allAnswers.map((answer,answerId) =>{
         return(
-        <Answer key={answer} answerId={answerId} className={getClassName(answerId)}
+        <Answer isCheckAnswerButtonPressed={isCheckAnswerButtonPressed} key={answer} answerId={answerId} className={getClassName(answerId)}
                 onClick={() => answerButtonClickHandler(answerId)} answer={answer}/>
         )});
 
