@@ -2,6 +2,9 @@ import React from 'react';
 import StartScreen from "./Start Screen/StartScreen";
 import GameScreen from "./Game Screen/GameScreen";
 import {QuestionModel} from "./Question/questionModel";
+
+
+
 function App() : JSX.Element {
     const [isGameRunning, setIsGameRunning] = React.useState<boolean>(false);
     const [questionModels,setQuestionModels] = React.useState<QuestionModel[]>([]);
@@ -56,6 +59,7 @@ function App() : JSX.Element {
                 .then(response => response.json())
                 .then(data => getArrayOfQuestionModels(data))
                 .then(question => setQuestionModels(question))
+
         }
     ,[currentGameNumber,gameSettings]);
 

@@ -7,8 +7,8 @@ interface AnswerCounterProps{
 export default function AnswersCounter({correctSelectedAnswers,totalNumberOfAnswers}:AnswerCounterProps):JSX.Element {
 
     return (
-        <div className={"counter"}>
-            <h1>{correctSelectedAnswers}/{totalNumberOfAnswers}</h1>
+        <div  className={"counter"}>
+            <h1 data-testid={"counter-h1"}>{correctSelectedAnswers}/{totalNumberOfAnswers}</h1>
         </div>
     )
 }
