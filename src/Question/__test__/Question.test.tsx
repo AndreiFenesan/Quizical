@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Question from "../Question";
-import {isTSAnyKeyword} from "@babel/types";
 import {render, screen, cleanup, fireEvent} from "@testing-library/react";
 import "@testing-library/jest-dom"
 
@@ -100,6 +99,29 @@ it("change className of the last clicked answer (new class name should be \"answ
     const answersExceptAnswer3 = screen.getAllByText(/answer[012]/i);//select the incorrect answers
     expect(answersExceptAnswer3.length).toBe(3);
     expect(answersExceptAnswer3.every(answer => answer.className === "answer--button check--answers--opacity")).toBe(true);//incorrect answers should be marked
+});
+
+it("disables all answer buttons when isCheckAnswerButtonPressed is true", () =>{
+    const questionProp={
+        questionId:0,
+        question:"Question1?",
+        correctAnswer:"Answer3",
+        allAnswers:["Answer0","Answer1","Answer2","Answer3"],
+        isCheckAnswerButtonPressed:true,
+        setIsCorrectAnswerSelectedForQuestionId:jest.fn(),
+    };
+    render(
+        <Question questionId={questionProp.questionId}
+                  question={questionProp.question}
+                  correctAnswer={questionProp.correctAnswer}
+                  allAnswers={questionProp.allAnswers}
+                  setIsCorrectAnswerSelectedForQuestionId={questionProp.setIsCorrectAnswerSelectedForQuestionId}
+                  isCheckAnswerButtonPressed={questionProp.isCheckAnswerButtonPressed}
+        />
+    );
+    const allAnswersElements = screen.getAllByText(/answer[0-9]/i);
+    expect(allAnswersElements.length).toBe(4);
+    allAnswersElements.forEach(answer => expect(answer).toBeDisabled());
 });
 
 
